@@ -1,0 +1,9 @@
+# Some variables that store data I want to remain local and encrypted
+
+set my_name="your_name"                                         # my name
+set my_hostname_gmail="gmail.com"                               # gmail hostname
+set my_hostname_work="work_hostname"                            # work hostname
+set my_email_address_gmail="username@gmail.com"                 # gmail e-mail address
+set my_email_address_work="work@email_address"                  # work e-mail address
+set my_pass_gmail="gmail_imap_pasword"                          # password to access to gmail account
+set my_pass_work="work_imap_password"                           # password to access to work account 
