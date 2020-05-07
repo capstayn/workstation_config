@@ -16,6 +16,13 @@ set mail_check = 120
 # How to structure and store e-mails. Allows fast search and prevents from file locking
 set mbox_type=Maildir
 
+# retrieve the passwords to the accounts 
+source "gpg -dq ~/.neomutt/local_variables.gpg |"
+# Prevent a wily intruder to see the value of the variables. I disable the
+# <enter-command>. For the rest of commands to work, they should be bound to a
+# key in advance
+bind generic,alias,attach,browser,editor,index,compose,pager,pgp,postpone ':' noop
+
 # threaded mode
 set sort=threads
 set sort_aux=last-date-sent
@@ -82,9 +89,9 @@ set virtual_spoolfile = yes
 virtual-mailboxes "Inbox" "notmuch://?query=tag:inbox"
 
 ## Eurecat
-folder-hook eurecat.org/ 'source ~/.neomutt/workrc'
+folder-hook $my_hostname_work 'source ~/.neomutt/workrc'
 ## gmail
-folder-hook gmail.com/ 'source ~/.neomutt/gmailrc'
+folder-hook $my_hostname_gmail 'source ~/.neomutt/gmailrc'
 
 # The last sourced will be the first in appear on neomutt
 source ~/.neomutt/gmailrc
@@ -97,7 +104,7 @@ source ~/.neomutt/workrc
 macro index <f2> '<sync-mailbox><enter-command>source ~/.neomutt/gmailrc<enter><change-folder>!<enter>'
 macro index <f3> '<sync-mailbox><enter-command>source ~/.neomutt/workrc<enter><change-folder>!<enter>'
 # follow links
-macro pager \cb <pipe-entry>'urlscan'<enter> 'Follow links in w3m' 
+macro pager \cb <pipe-entry>'urlscan'<enter> 'Follow links in urlscan' 
 #macro pager \cb <pipe-entry>'w3m'<enter> 'Follow links in w3m' 
 # macro pager \cb <pipe-entry>'urlview'<enter> 'Follow links in urlview' 
 

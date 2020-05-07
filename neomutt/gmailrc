@@ -6,20 +6,19 @@ unmailboxes *
 # you need to unset all the variables not used here but defined on the other
 # account. Otherwise they'll affect this one, and that's not good
 unset signature
+unset smtp_authenticators 
 
 ## Receive options
 # Apparently, only gmail requires the full mail address
-set hostname='gmail.com'
-set imap_user=petercapstayn@gmail.com
-# sensitive data (imap_pass)
-source ~/.neomutt/local_gmail
+set hostname= $my_hostname_gmail
+set imap_user=$my_email_address_gmail
+set imap_pass=$my_pass_gmail
 # folder (ideally a server!)
-#set folder = "imaps://petercapstayn@imap.gmail.com:993" # does this work?
 set folder = "imaps://imap.gmail.com:993"
 # spoolfile (where new e-mail arrives). '+' indicates folder path
-set spoolfile = "imaps://imap.gmail.com/INBOX"
+set spoolfile = "+INBOX"
 # Specify where to save and/or look for postponed messages.
-set postponed = +Drafts
+set postponed = +[Gmail]/Drafts
 set record = +Sent
 # Store messages locally to speed things up, like searching message bodies.
 # Can be the same folder as header_cache.
@@ -29,22 +28,14 @@ set message_cachedir = "~/.cache/neomutt/gmail/bodies"
 set certificate_file ="~/.neomutt/certificates"
 
 ### gmail imap SMTPS settings
-set realname = 'Pedro Cavestany'
-set from = petercapstayn@gmail.com
+set realname = $my_name
+set from = $imap_user
 set use_from = yes
 set smtp_url = "smtps://$imap_user:$imap_pass@smtp.gmail.com:465/"
 # Forces encryption connection to servers
 set ssl_force_tls = yes
 # No idea what move is: commented
 #set move = no 
-# I should unset this variable, which has been set for Eurecat account
-unset smtp_authenticators 
-
-# Commented because everything seems to work without them
-#set hostname="gmail.com"
-#set signature="John Doe"
-# Connection options
-#unset ssl_starttls
 
 ## Hook -- IMPORTANT!
-account-hook gmail.com 'set imap_user=petercapstayn@gmail.com imap_pass=$imap_pass'
+account-hook gmail.com 'set imap_user=$imap_user imap_pass=$imap_pass'
