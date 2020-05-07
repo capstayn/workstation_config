@@ -18,17 +18,17 @@ minor objections about this method made. Both are worth a read.
 Quick notes on gpg:
  * To generate gpg keys simply run:
    ```bash
-gpg --full-gen-ke
+   gpg --full-gen-ke
    ```
  * store a passphrase in keepassx.
  * use gpg-agent to cache passwords on active sessions,
    ```
-#~/.gnupg/gpg-agent.conf
-default-cache-ttl 3600
+   #~/.gnupg/gpg-agent.conf
+   default-cache-ttl 3600
    ```
  * on Arch `gpg-agent` is controlled by
    ```bash
-systemctl --user start/status/... gpg-agent.socketkjjjk
+   systemctl --user start/status/etc gpg-agent.socket
    ```
 
 ## Changing authentication to OAuth 2
@@ -36,7 +36,7 @@ systemctl --user start/status/... gpg-agent.socketkjjjk
 Neomutt has a [preliminary
 support](https://neomutt.org/guide/optionalfeatures.html#oauth) for OAuth 2.
 Step-by-step procedure is described
-[here](https://luxing.im/mutt-integration-with-gmail-using-oauth/)
+[here](https://luxing.im/mutt-integration-with-gmail-using-oauth/).
 
 *Note: I am sitll not convinced what "protocolar" benefits are offered through
 OAuth.*
