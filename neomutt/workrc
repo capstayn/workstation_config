@@ -1,0 +1,49 @@
+# Eurecat imap mail settings
+
+
+# remove mailboxes from the other account, so they won't appear on the sidebar
+unmailboxes *
+
+## Receive options
+set hostname='eurecat.org'
+set imap_user= pedro.cavestany@eurecat.org
+# sensitive data (imap_pass)
+source ~/.neomutt/local_work
+# folder (ideally a server!)
+set folder = "imaps://outlook.office365.com:993"
+# spoolfile (where new e-mail arrives). '+' indicates folder path
+set spoolfile ="imaps://outlook.office365.com/INBOX"
+# Specify where to save and/or look for postponed messages.
+set postponed = +Drafts
+set record = +Sent
+# Store messages locally to speed things up, like searching message bodies.
+# Can be the same folder as header_cache.
+# This will cost important disk usage according to your e-mail amount.
+set message_cachedir = "~/.cache/neomutt/eut/bodies"
+# Trusted certificates 
+set certificate_file ="~/.neomutt/certificates"
+
+### Eurecat SMTPS settings
+set realname = 'Pedro Cavestany'
+set from = pedro.cavestany@eurecat.org 
+set use_from = yes
+#set smtp_url = "smtps://$imap_user:$imap_pass@smtp.gmail.com:465/"
+set smtp_url = "smtp://$imap_user@smtp.office365.com:587/" smtp_pass="$imap_pass"
+# Forces encryption connection to servers
+#set ssl_force_tls = yes
+# Mandatory for outlook
+set ssl_starttls = yes
+# No idea what move is: commented
+#set move = no 
+set smtp_authenticators = "login"
+set signature="~/.neomutt/signature_eut.txt"
+
+
+# Commented because everything seems to work without them
+#set hostname="gmail.com"
+#set signature="John Doe"
+# Connection options
+#unset ssl_starttls
+
+## Hook -- IMPORTANT!
+account-hook $folder "set imap_user=pedro.cavestany@eurecat.org imap_pass=$imap_pass"

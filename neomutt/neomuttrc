@@ -1,0 +1,103 @@
+# neomutt configuration file
+# Settings are copied from various sites, I may document this some day
+
+## General settings
+# Store message headers locally to speed things up.
+# If hcache is a folder, Mutt will create sub cache folders for each account which may speeds things up even more.
+set header_cache = "~/.cache/neomutt/headers"
+# check all subscribed IMAP folders. The alternative is using mailboxes
+set imap_check_subscribed
+# Keep the IMAP connection alive by polling intermittently (time in seconds).
+set imap_keepalive = 300
+# Allow Mutt to open a new IMAP connection automatically. 
+unset imap_passive
+# How often to check for new mail (time in seconds).
+set mail_check = 120
+# How to structure and store e-mails. Allows fast search and prevents from file locking
+set mbox_type=Maildir
+
+# threaded mode
+set sort=threads
+set sort_aux=last-date-sent
+# Don't really know to what this affects
+#set sort_browser=date
+
+# Let's make it colourful!
+color hdrdefault white black  # headers white on black
+color header brightgreen black ^From:  # sender's name in green
+color quoted cyan black  # quoted text in blue
+color signature red black   # signature in red
+
+# Sidebar
+set sidebar_visible
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set sidebar_width   = 24
+set sidebar_sort_method = alpha
+# color sidebar_new color221 color233
+color sidebar_indicator default         color17 # Dark blue background
+color sidebar_highlight white           color238 # Grey background
+color sidebar_spoolfile yellow          default # Yellow
+color sidebar_unread    color178        default # Light blue color178: orange-ish
+color sidebar_new       green           default # Green
+color sidebar_ordinary  default         default # Default colors
+color sidebar_flagged   red             default # Red
+color sidebar_divider   color8          default # Dark grey
+
+set mail_check_stats
+
+# Some bindings. These can definitely be improved. The defaults are even more
+# convenient
+# Ctrl-Shift-P – Previous Mailbox
+bind index,pager \CP sidebar-prev
+# Ctrl-Shift-N – Next Mailbox
+bind index,pager \CN sidebar-next
+# Ctrl-Shift-O – Open Highlighted Mailbox
+bind index,pager \CO sidebar-open
+#set sidebar_delim   = '  │' # implemented by default on neomutt?
+
+# Status Bar -----------------------------------------
+set status_chars  = " *%A"
+set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+
+# Header Options -------------------------------------
+ignore *                                # ignore all headers
+unignore from: to: cc: date: subject:   # show only these
+unhdr_order *                           # some distros order things by default
+hdr_order from: to: cc: date: subject:  # and in this order
+
+# for viewing html e-mails inside neomutt.  See also .mailcap
+auto_view text/html
+alternative_order text/enriched text/plain text text/html       # check out what this means
+
+# Include my replies on threads -------------------------------------
+# This variable specifies notmuch query type, supported types: 'threads' and
+# 'messages'.
+set nm_query_type = threads
+
+# When set, mutt will use the first virtual mailbox (see virtual-mailboxes)
+# as a spoolfile.
+set virtual_spoolfile = yes
+
+# virtual-mailboxes description notmuch-URI { description notmuch-URI ...}
+virtual-mailboxes "Inbox" "notmuch://?query=tag:inbox"
+
+## Eurecat
+folder-hook eurecat.org/ 'source ~/.neomutt/workrc'
+## gmail
+folder-hook gmail.com/ 'source ~/.neomutt/gmailrc'
+
+# The last sourced will be the first in appear on neomutt
+source ~/.neomutt/gmailrc
+source ~/.neomutt/workrc
+
+## macros
+# switch to different accounts
+#macro index <f2> '<change-folder>imaps://imap.gmail.com<enter>'
+#macro index <f3> '<change-folder>imaps://imap.eurecat.org<enter>'
+macro index <f2> '<sync-mailbox><enter-command>source ~/.neomutt/gmailrc<enter><change-folder>!<enter>'
+macro index <f3> '<sync-mailbox><enter-command>source ~/.neomutt/workrc<enter><change-folder>!<enter>'
+# follow links
+macro pager \cb <pipe-entry>'urlscan'<enter> 'Follow links in w3m' 
+#macro pager \cb <pipe-entry>'w3m'<enter> 'Follow links in w3m' 
+# macro pager \cb <pipe-entry>'urlview'<enter> 'Follow links in urlview' 
+
