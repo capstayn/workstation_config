@@ -9,8 +9,8 @@ data included can be public
 
 ## Encrypting passwords/token with GPG
 
-In order to avoid storing passwords/tokens in mutt config files you can encrypt
-them with an active gpg key. It's well described
+In order to avoid storing passwords/tokens in mutt configuration files you can
+encrypt them with an active GPG key. It's well described
 [here](https://pthree.org/2012/01/07/encrypted-mutt-imap-smtp-passwords/)
 although in [here](https://gist.github.com/bnagy/8914f712f689cc01c267) some
 minor objections about this method made. Both are worth a read.
@@ -18,9 +18,9 @@ minor objections about this method made. Both are worth a read.
 Quick notes on gpg:
  * To generate gpg keys simply run:
    ```bash
-   gpg --full-gen-ke
+   gpg --full-gen-key
    ```
- * store a passphrase in keepassx.
+ * store a passphrase in keepassx,
  * use gpg-agent to cache passwords on active sessions,
    ```
    #~/.gnupg/gpg-agent.conf
