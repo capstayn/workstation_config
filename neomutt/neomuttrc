@@ -88,7 +88,7 @@ set virtual_spoolfile = yes
 # virtual-mailboxes description notmuch-URI { description notmuch-URI ...}
 virtual-mailboxes "Inbox" "notmuch://?query=tag:inbox"
 
-## Eurecat
+## work
 folder-hook $my_hostname_work 'source ~/.neomutt/workrc'
 ## gmail
 folder-hook $my_hostname_gmail 'source ~/.neomutt/gmailrc'

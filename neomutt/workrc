@@ -3,6 +3,9 @@
 # remove mailboxes from the other account, so they won't appear on the sidebar
 unmailboxes *
 
+# unset variables from other accounts not used here
+# unset record, as outlook is already saving sent messages in the Sent mailbox
+unset record 
 ## Receive options
 set hostname= $my_hostname_work
 set imap_user= $my_email_address_work
@@ -13,8 +16,6 @@ set folder = "imaps://outlook.office365.com:993"
 set spoolfile =+INBOX
 # Specify where to save and/or look for postponed messages.
 set postponed = +Drafts
-# Variable record shouldn't be set, as outlook is already saving sent messages in
-# the Sent mailbox
 # Store messages locally to speed things up, like searching message bodies.
 # Can be the same folder as header_cache.
 # This will cost important disk usage according to your e-mail amount.

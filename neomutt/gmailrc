@@ -7,6 +7,8 @@ unmailboxes *
 # account. Otherwise they'll affect this one, and that's not good
 unset signature
 unset smtp_authenticators 
+# unset record as gmail is already saving sent messages in the Sent mailbox
+unset record
 
 ## Receive options
 # Apparently, only gmail requires the full mail address
@@ -19,8 +21,6 @@ set folder = "imaps://imap.gmail.com:993"
 set spoolfile = "+INBOX"
 # Specify where to save and/or look for postponed messages.
 set postponed = +[Gmail]/Drafts
-# Variable record shouldn't be set, as gmail is already saving sent messages in
-# the Sent mailbox
 # Store messages locally to speed things up, like searching message bodies.
 # Can be the same folder as header_cache.
 # This will cost important disk usage according to your e-mail amount.
